@@ -1,32 +1,28 @@
 let noCount = 0;
+let yesBtn = document.getElementById("yesBtn");
+let noBtn = document.getElementById("noBtn");
+let teddy = document.getElementById("teddy");
+let status = document.getElementById("status");
 
-const teddy = document.getElementById("teddy");
-const yesBtn = document.getElementById("yes");
-const noBtn = document.getElementById("no");
-const text = document.getElementById("text");
-
-function noClick() {
+noBtn.addEventListener("click", () => {
   noCount++;
 
-  // YES button SUPER BIG
-  let scaleValue = 1.3 + noCount * 0.6;
-  yesBtn.style.transform = `scale(${scaleValue})`;
+  status.innerText = "She clicked NO 😢 (" + noCount + " times)";
 
-  // Teddy emotions
-  if (noCount === 1) teddy.src = "sad1.gif";
-  if (noCount === 2) teddy.src = "sad2.gif";
-  if (noCount === 3) teddy.src = "sad3.gif";
+  let currentSize = 1 + noCount * 0.3;
+  yesBtn.style.transform = `scale(${currentSize})`;
 
-  // NO hide after 3
-  if (noCount >= 3) {
+  teddy.src = "sad" + noCount + ".gif";
+
+  noBtn.style.opacity = 1 - noCount * 0.2;
+  if (noCount >= 4) {
     noBtn.style.display = "none";
-    text.innerText = "Please say YES 🥺💔";
   }
-}
+});
 
-function yesClick() {
-  teddy.src = "happy.gif";
-  text.innerText = "Yayyy! You made me the happiest 🥰💋";
+yesBtn.addEventListener("click", () => {
+  status.innerText = "She said YES 💍💖";
+  teddy.src = "kiss.gif";
   noBtn.style.display = "none";
-  yesBtn.style.transform = "scale(2.8)";
-}
+});
+
